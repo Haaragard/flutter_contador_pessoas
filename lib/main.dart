@@ -3,7 +3,28 @@ import 'package:flutter/material.dart';
 void main() {
   runApp(MaterialApp(
     title: "Contador de Pessoas",
-    home: Stack(
+    home: Home(),
+  ));
+}
+
+class Home extends StatefulWidget {
+  @override
+  _HomeState createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+
+  int _people = 0;
+
+  void _changePeople(int value) {
+    setState(() {
+      _people += value;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
       fit: StackFit.expand,
       children: <Widget>[
         Image.asset(
@@ -13,7 +34,7 @@ void main() {
         Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text("Pessoas: 00",
+            Text("Pessoas: $_people",
               style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold
@@ -27,13 +48,17 @@ void main() {
                   child: Text("+1",
                     style: TextStyle(fontSize: 40.0, color: Colors.white),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    _changePeople(1);
+                  },
                 ),
                 FlatButton(
                   child: Text("-1",
                     style: TextStyle(fontSize: 40.0, color: Colors.white),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    _changePeople(-1);
+                  },
                 ),
               ],
             ),
@@ -49,6 +74,6 @@ void main() {
           ],
         ),
       ],
-    ),
-  ));
+    );
+  }
 }
